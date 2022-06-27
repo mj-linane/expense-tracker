@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './ChartBar.module.css'
+import styles from './Chartbar.module.css'
 
 const ChartBar = (props) => {
   let barFillHeight = props.value
