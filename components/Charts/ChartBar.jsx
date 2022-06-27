@@ -4,7 +4,7 @@ import styles from './ChartBar.module.css'
 const ChartBar = (props) => {
   let barFillHeight = props.value
 
-  if (props.maxValue) {
+  if (props.maxValue > 0) {
     barFillHeight = `${Math.round((props.value / props.maxValue) * 100)}%`
   }
 
