@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import styles from './NewExpense.module.css'
 import ExpenseForm from './ExpenseForm'
 
 const NewExpense = (props) => {
+  const [showFullForm, setShowFullForm] = useState(false)
+
   const saveExpenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
       ...enteredExpenseData,
@@ -10,24 +13,24 @@ const NewExpense = (props) => {
     props.onAddExpense(expenseData)
   }
 
-  return (
-    <div className="new-expense">
-      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+  const toggleFormHandler = () => {
+    setShowFullForm(!showFullForm)
+  }
 
-      <style jsx>{`
-        .new-expense {
-          background-color: #a892ee;
-          padding: 1rem;
-          margin: 2rem auto;
-          width: 50rem;
-          max-width: 95%;
-          border-radius: 12px;
-          text-align: center;
-          box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
-        }
-      `}</style>
+  const renderedForm = showFullForm ? (
+    <ExpenseForm
+      onSaveExpenseData={saveExpenseDataHandler}
+      onFormToggle={toggleFormHandler}
+    />
+  ) : (
+    <div className="new-expense__actions">
+      <button type="submit" onClick={toggleFormHandler}>
+        Add New Expense
+      </button>
     </div>
   )
+
+  return <div className={styles['new-expense']}>{renderedForm}</div>
 }
 
 export default NewExpense
